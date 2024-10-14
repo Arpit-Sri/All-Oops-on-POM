@@ -1,0 +1,62 @@
+/**
+ * 
+ */
+package com.MyTest;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Parameters;
+
+import com.mypages.BasePage;
+import com.mypages.Page;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+/**
+ * @author Arpit
+ */
+//Parent Class
+//In this class we need to define Before & After Method.
+
+public class BaseTest {
+	//declaring a variable of WebDriver and Page(Page(Super Class) Class from src/main/java) Variable .
+	WebDriver driver;
+	public Page page;
+	
+	@BeforeMethod
+	@Parameters(value= {"browser"}) //from testNG.xml we pass the browser=Chrome. Chrome will be given to this method.
+	public void setUpTest(String browser) throws InterruptedException {
+		if(browser.equals("chrome")) {
+			WebDriverManager.chromedriver().setup();
+			driver=new ChromeDriver();
+		} 
+		else if(browser.equals("ff")) {
+			WebDriverManager.firefoxdriver().setup();
+			driver=new FirefoxDriver();
+			
+		}
+		else {
+			System.out.println("no browser is defined in xml file...");
+		}
+		
+		//launch url
+		//hard coding ,well cover later.
+		driver.get("https://tutorialsninja.com/demo/index.php?route=account/login");
+		Thread.sleep(6000);
+		
+		//now we are calling a constrctor of Base class.
+		//because we have to pass this drivers to Page class constrctor,then it only it will supply to all pages .
+		 page =new BasePage(driver);
+		
+	}
+	
+	@AfterMethod
+	public void tearDown() {
+		driver.quit();
+	}
+	
+	
+}

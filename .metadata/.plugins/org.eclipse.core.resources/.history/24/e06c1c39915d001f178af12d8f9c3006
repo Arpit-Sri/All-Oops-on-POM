@@ -1,0 +1,74 @@
+package com.tutorialsninja.qa.testcases;
+
+import java.time.Duration;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+public class LogIn {
+	
+	
+	@Test
+	public void verifyWithValidCredentials() throws InterruptedException {
+		
+		WebDriver driver = new ChromeDriver();
+		
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(5));
+		
+		driver.get("https://tutorialsninja.com/demo/");
+		
+		driver.findElement(By.xpath("//span[@class='caret']")).click();
+		driver.findElement(By.linkText("Login")).click();
+		
+		
+		
+		driver.findElement(By.id("input-email")).sendKeys("amotooricap9@gmail.com");
+		driver.findElement(By.id("input-password")).sendKeys("12345");
+		driver.findElement(By.xpath("//input[@class='btn btn-primary']")).click();
+		driver.findElement(By.linkText("Edit your account information"));
+		
+		Assert.assertTrue(driver.findElement(By.linkText("Edit your account information")).isDisplayed());
+		
+		driver.quit();
+		
+	}
+	
+	@Test
+	
+	public void verifyWithInvalidCredentials() throws InterruptedException {
+		
+		WebDriver driver = new ChromeDriver();
+		
+		
+		//WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		//wait.until(ExpectedConditions.visibilityOf(null))
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(5));
+		
+		driver.get("https://tutorialsninja.com/demo/");
+		
+		driver.findElement(By.xpath("//span[@class='caret']")).click();
+		driver.findElement(By.linkText("Login")).click();
+		driver.findElement(By.id("input-email")).sendKeys("amotooricap023lp9@gmail.com");
+		driver.findElement(By.id("input-password")).sendKeys("123459lpo");
+		driver.findElement(By.xpath("//input[@class='btn btn-primary']")).click();
+		
+		Thread.sleep(3000);
+		driver.findElement(By.linkText("alert alert-danger alert-dismissible"));
+		
+		
+		Assert.assertTrue(driver.findElement(By.linkText("alert alert-danger alert-dismissible")).isDisplayed());
+		
+		driver.quit();
+	}
+	
+}

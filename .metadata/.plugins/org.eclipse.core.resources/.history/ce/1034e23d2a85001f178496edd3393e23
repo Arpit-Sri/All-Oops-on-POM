@@ -1,0 +1,8 @@
+package com.mypages;
+
+/**
+ * @author Arpit
+ */
+public class LoginPage extends  {
+
+}

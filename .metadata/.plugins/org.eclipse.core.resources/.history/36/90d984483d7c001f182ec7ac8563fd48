@@ -1,0 +1,20 @@
+package com.mypages;
+
+import org.checkerframework.common.reflection.qual.NewInstance;
+
+class B {
+	
+	public void demo() {
+		System.out.println("hi");
+	}
+}
+
+	
+public class A {
+
+	public static void main(String[] args) {
+	
+		
+	}
+
+}

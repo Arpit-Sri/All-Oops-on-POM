@@ -1,0 +1,12 @@
+package com.mypages;
+
+import org.openqa.selenium.WebDriver;
+
+public class HomePage extends LogIn {
+
+	public HomePage(WebDriver driver) {
+		super(driver);
+		
+	}
+
+}
